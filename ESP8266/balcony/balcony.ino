@@ -48,7 +48,7 @@ IRrecv irReceiver(RECV_PIN);
 const bool apMode = false;
 
 // AP mode password
-const char WiFiAPPSK[] = "";
+const char WiFiAPPSK[] = "333Kings";
 
 // Wi-Fi network to connect to (if not in AP mode)
 const char* ssid = "family24";
@@ -63,15 +63,15 @@ ESP8266HTTPUpdateServer httpUpdateServer;
 #define DATA_PIN      5
 #define LED_TYPE      WS2812
 #define COLOR_ORDER   GRB
-#define NUM_LEDS      150
+#define NUM_LEDS      300
 
-#define MILLI_AMPS         4000     // IMPORTANT: set the max milli-Amps of your power supply (4A = 4000mA)
-#define FRAMES_PER_SECOND  120 // here you can control the speed. With the Access Point / Web Server the animations run a bit slower.
+#define MILLI_AMPS         10000     // IMPORTANT: set the max milli-Amps of your power supply (4A = 4000mA)
+#define FRAMES_PER_SECOND  240 // here you can control the speed. With the Access Point / Web Server the animations run a bit slower.
 
-//#include "Map.h"
+#include "Map.h"
 
 // maps for 150 pixels
-#include "Map150.h"
+//#include "Map150.h"
 
 CRGB leds[NUM_LEDS];
 
