@@ -48,7 +48,7 @@ IRrecv irReceiver(RECV_PIN);
 const bool apMode = false;
 
 // AP mode password
-const char WiFiAPPSK[] = "333Kings";
+const char WiFiAPPSK[] = "";
 
 // Wi-Fi network to connect to (if not in AP mode)
 const char* ssid = "";
@@ -63,15 +63,15 @@ ESP8266HTTPUpdateServer httpUpdateServer;
 #define DATA_PIN      5
 #define LED_TYPE      WS2812
 #define COLOR_ORDER   GRB
-#define NUM_LEDS      300
+#define NUM_LEDS      250
 
 #define MILLI_AMPS         10000     // IMPORTANT: set the max milli-Amps of your power supply (4A = 4000mA)
 #define FRAMES_PER_SECOND  240 // here you can control the speed. With the Access Point / Web Server the animations run a bit slower.
 
 #include "Map.h"
 
-// maps for 150 pixels
-//#include "Map150.h"
+// maps for 300 pixels
+//#include "Map300.h"
 
 CRGB leds[NUM_LEDS];
 
@@ -184,7 +184,6 @@ PatternAndNameList patterns = {
   { northwestwardRainbow,   "Northwestward Rainbow" },
 
   { rotatingRainbow,        "Rotating Rainbow" },
-  { propellerRainbow,       "Propeller Rainbow" },
   { outwardRainbow,         "Outward Rainbow" },
   { inwardRainbow,          "Inward Rainbow" },
   { fallingRainbow,         "Falling Rainbow" },
@@ -219,7 +218,6 @@ PatternAndNameList patterns = {
   { oceanTwinkles,          "Ocean Twinkles" },
 
   { candyCane,              "Candy Cane" },
-  { candyCane2,             "Candy Cane 2" },
 
   // noise patterns
   { fireNoise, "Fire Noise" },
@@ -1059,22 +1057,6 @@ void rotatingRainbow()
   }
 }
 
-void propellerRainbow() 
-{
-  ledIndex++;
-  uint8_t N3  = int(NUM_LEDS/3);
-  uint8_t N6  = int(NUM_LEDS/6);  
-  uint8_t N12 = int(NUM_LEDS/12);  
-  for(uint8_t i = 0; i < N3; i++ ) {
-    uint8_t j0 = (ledIndex + i + NUM_LEDS - N12) % NUM_LEDS;
-    uint8_t j1 = (j0+N3) % NUM_LEDS;
-    uint8_t j2 = (j1+N3) % NUM_LEDS;    
-    leds[j0] = CHSV(0, 255, brightness);
-    leds[j1] = CHSV(80, 255, brightness);
-    leds[j2] = CHSV(160, 255, brightness);    
-  }
-}
-
 void risingRainbow()
 {
   for (uint8_t i = 0; i < NUM_LEDS; i++)
@@ -1129,28 +1111,6 @@ void candyCane() {
   for (uint8_t i = 0; i < NUM_LEDS; i++)
   {
     leds[i] = ColorFromPalette(RedWhite_p, zCoords[i] - beat8(speed));
-  }
-}
-
-void candyCane2() 
-{
-  ledIndex++;
-  uint8_t N3  = int(NUM_LEDS/3);
-  uint8_t N6  = int(NUM_LEDS/6);  
-  uint8_t N12 = int(NUM_LEDS/12);  
-  for(uint8_t i = 0; i < N6; i++ ) {
-    uint8_t j0 = (ledIndex + i + NUM_LEDS - N12) % NUM_LEDS;
-    uint8_t j1 = (j0+N6) % NUM_LEDS;
-    uint8_t j2 = (j1+N6) % NUM_LEDS;
-    uint8_t j3 = (j2+N6) % NUM_LEDS;
-    uint8_t j4 = (j3+N6) % NUM_LEDS;
-    uint8_t j5 = (j4+N6) % NUM_LEDS;
-    leds[j0] = CRGB(255, 255, 255).nscale8_video(brightness*.75);
-    leds[j1] = CRGB(255, 0, 0).nscale8_video(brightness);
-    leds[j2] = CRGB(255, 255, 255).nscale8_video(brightness*.75);
-    leds[j3] = CRGB(255, 0, 0).nscale8_video(brightness);
-    leds[j4] = CRGB(255, 255, 255).nscale8_video(brightness*.75);
-    leds[j5] = CRGB(255, 0, 0).nscale8_video(brightness);
   }
 }
 
