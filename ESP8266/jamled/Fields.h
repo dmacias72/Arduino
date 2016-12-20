@@ -40,6 +40,18 @@ String getPatterns() {
   return json;
 }
 
+String getPatternsSelect() {
+  String json = "";
+
+  for (uint8_t i = 0; i < patternCount; i++) {
+    json += "\"" + patterns[i].name + "\"";
+    if (i < patternCount - 1)
+      json += ",";
+  }
+
+  return json;
+}
+
 String getAutoplay() {
   return String(autoplay);
 }
