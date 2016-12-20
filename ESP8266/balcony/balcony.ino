@@ -342,6 +342,7 @@ void setup() {
     if (String(WiFi.SSID()) != String(ssid)) {
       WiFi.begin(ssid, password);
     }
+    WiFi.mode(WIFI_STA);
   }
 
   httpUpdateServer.setup(&webServer);
@@ -883,10 +884,10 @@ void adjustPattern(bool up)
     currentPatternIndex = patternCount - 1;
   if (currentPatternIndex >= patternCount)
     currentPatternIndex = 0;
-
-  EEPROM.write(1, currentPatternIndex);
-  EEPROM.commit();
-
+  if (autoplay == 0){
+    EEPROM.write(1, currentPatternIndex);
+    EEPROM.commit();
+  }
   broadcastInt("pattern", currentPatternIndex);
 }
 
@@ -896,10 +897,10 @@ void setPattern(uint8_t value)
     value = patternCount - 1;
 
   currentPatternIndex = value;
-
-  EEPROM.write(1, currentPatternIndex);
-  EEPROM.commit();
-
+  if (autoplay == 0){
+    EEPROM.write(1, currentPatternIndex);
+    EEPROM.commit();
+  }
   broadcastInt("pattern", currentPatternIndex);
 }
 
