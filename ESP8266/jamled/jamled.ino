@@ -15,6 +15,7 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+
 #include <FastLED.h>
 FASTLED_USING_NAMESPACE
 
@@ -36,7 +37,7 @@ extern "C" {
 
 #include "Field.h"
 
-#define HOSTNAME "JAMLED-" ///< Hostname. The setup function adds the Chip ID at the end.
+#define HOSTNAME "James-" ///< Hostname. The setup function adds the Chip ID at the end.
 
 #include "elapsedMillis.h"
 
@@ -55,14 +56,18 @@ ESP8266HTTPUpdateServer httpUpdateServer;
 #define COLOR_ORDER   GRB
 #define NUM_LEDS      150
 
-#define MILLI_AMPS         10000     // IMPORTANT: set the max milli-Amps of your power supply (4A = 4000mA)
+#define MILLI_AMPS         4000     // IMPORTANT: set the max milli-Amps of your power supply (4A = 4000mA)
 #define FRAMES_PER_SECOND  240 // here you can control the speed. With the Access Point / Web Server the animations run a bit slower.
 
-#include "Map.h"
+//#include "Map.h"
+
+// maps for 150 pixels
+#include "Map150.h"
 
 CRGB leds[NUM_LEDS];
 
 uint8_t patternIndex = 0;
+uint8_t ledIndex = 0;
 
 const uint8_t brightnessCount = 5;
 uint8_t brightnessMap[brightnessCount] = { 16, 32, 64, 128, 255 };
@@ -70,7 +75,7 @@ uint8_t brightnessIndex = 0;
 
 // ten seconds per color palette makes a good demo
 // 20-120 is better for deployment
-uint8_t secondsPerPalette = 20;
+uint8_t secondsPerPalette = 10;
 
 // COOLING: How much does the air cool as it rises?
 // Less cooling = taller flames.  More cooling = shorter flames.
@@ -97,6 +102,7 @@ CRGBPalette16 gCurrentPalette( CRGB::Black);
 CRGBPalette16 gTargetPalette( gGradientPalettes[0] );
 
 CRGBPalette16 IceColors_p = CRGBPalette16(CRGB::Black, CRGB::Blue, CRGB::Aqua, CRGB::White);
+CRGBPalette16 gPalette;
 
 uint8_t currentPatternIndex = 0; // Index number of which pattern is current
 uint8_t autoplay = 0;
@@ -148,6 +154,8 @@ typedef PatternAndName PatternAndNameList[];
 #include "Twinkles.h"
 #include "TwinkleFOX.h"
 #include "Noise.h"
+#include "Lightning2014.h"
+#include "BouncingBalls2014.h"
 
 // List of patterns to cycle through.  Each is defined as a separate function below.
 
@@ -202,6 +210,10 @@ PatternAndNameList patterns = {
   { fireTwinkles,           "Fire Twinkles" },
   { cloud2Twinkles,         "Cloud 2 Twinkles" },
   { oceanTwinkles,          "Ocean Twinkles" },
+  { cosmicTwinkles,         "Cosmic Twinkles" },
+  { cosmic2Twinkles,        "Cosmic 2 Twinkles" },
+  { purpleredTwinkles,      "Purple Red Twinkles" },
+  { watermelonTwinkles,     "Watermelon Twinkles" },
 
   { candyCane,              "Candy Cane" },
 
@@ -217,6 +229,8 @@ PatternAndNameList patterns = {
   { oceanNoise, "Ocean Noise" },
   { blackAndWhiteNoise, "Black & White Noise" },
   { blackAndBlueNoise, "Black & Blue Noise" },
+  { cosmicNoise, "Cosmic Noise" },
+  { watermelonNoise, "Watermelon Noise" },
 
   { rainbow,                "Rainbow" },
   { rainbowWithGlitter,     "Rainbow With Glitter" },
@@ -224,7 +238,9 @@ PatternAndNameList patterns = {
   { confetti,               "Confetti" },
   { sinelon,                "Sinelon" },
   { bpm,                    "Beat" },
+  { bouncingballs,          "Bouncing Balls 2014" },
   { juggle,                 "Juggle" },
+  { lightning,              "Lightning 2014" },
   { fire,                   "Fire" },
   { water,                  "Water" },
 
@@ -254,6 +270,8 @@ void setup() {
   loadSettings();
 
   FastLED.setBrightness(brightness);
+
+  gPalette = HeatColors_p;
 
   Serial.println();
   Serial.print( F("Heap: ") ); Serial.println(system_get_free_heap_size());
@@ -621,10 +639,10 @@ void adjustPattern(bool up)
     currentPatternIndex = patternCount - 1;
   if (currentPatternIndex >= patternCount)
     currentPatternIndex = 0;
-
-  EEPROM.write(1, currentPatternIndex);
-  EEPROM.commit();
-
+  if (autoplay == 0){
+    EEPROM.write(1, currentPatternIndex);
+    EEPROM.commit();
+  }
   broadcastInt("pattern", currentPatternIndex);
 }
 
@@ -634,8 +652,7 @@ void setPattern(uint8_t value)
     value = patternCount - 1;
 
   currentPatternIndex = value;
-
-  if (autoplay = 0){
+  if (autoplay == 0){
     EEPROM.write(1, currentPatternIndex);
     EEPROM.commit();
   }
@@ -912,6 +929,11 @@ void bpm()
   }
 }
 
+void bouncingballs()
+{
+  bouncingBalls2014();
+}
+
 void juggle()
 {
   static uint8_t    numdots =   4; // Number of dots in use.
@@ -944,6 +966,11 @@ void juggle()
     leds[beatsin16(basebeat + i + numdots, 0, NUM_LEDS)] += CHSV(gHue + curhue, thissat, thisbright);
     curhue += hueinc;
   }
+}
+
+void lightning()
+{
+  lightning2014();
 }
 
 void fire()

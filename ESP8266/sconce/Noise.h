@@ -191,3 +191,20 @@ void blackAndBlueNoise() {
   noisescale = 1;
   drawNoise(blackAndBlueStripedPalette);
 }
+
+void cosmicNoise() {
+  noisespeedx = 2;
+  noisespeedy = 0;
+  noisespeedz = 0;
+  noisescale = 1;
+  drawNoise(bhw2_38_gp);
+}
+
+void watermelonNoise() {
+  noisespeedx = 2;
+  noisespeedy = 0;
+  noisespeedz = 0;
+  noisescale = 1;
+  drawNoise(bhw2_08_gp);
+}
+

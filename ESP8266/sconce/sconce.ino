@@ -178,7 +178,6 @@ PatternAndNameList patterns = {
   { northwestwardRainbow,   "Northwestward Rainbow" },
 
   { rotatingRainbow,        "Rotating Rainbow" },
-  { propellerRainbow,       "Propeller Rainbow" },
   { outwardRainbow,         "Outward Rainbow" },
   { inwardRainbow,          "Inward Rainbow" },
   { fallingRainbow,         "Falling Rainbow" },
@@ -211,9 +210,12 @@ PatternAndNameList patterns = {
   { fireTwinkles,           "Fire Twinkles" },
   { cloud2Twinkles,         "Cloud 2 Twinkles" },
   { oceanTwinkles,          "Ocean Twinkles" },
+  { cosmicTwinkles,         "Cosmic Twinkles" },
+  { cosmic2Twinkles,        "Cosmic 2 Twinkles" },
+  { purpleredTwinkles,      "Purple Red Twinkles" },
+  { watermelonTwinkles,     "Watermelon Twinkles" },
 
   { candyCane,              "Candy Cane" },
-  { candyCane2,             "Candy Cane 2" },
 
   // noise patterns
   { fireNoise, "Fire Noise" },
@@ -227,6 +229,8 @@ PatternAndNameList patterns = {
   { oceanNoise, "Ocean Noise" },
   { blackAndWhiteNoise, "Black & White Noise" },
   { blackAndBlueNoise, "Black & Blue Noise" },
+  { cosmicNoise, "Cosmic Noise" },
+  { watermelonNoise, "Watermelon Noise" },
 
   { rainbow,                "Rainbow" },
   { rainbowWithGlitter,     "Rainbow With Glitter" },
@@ -809,22 +813,6 @@ void rotatingRainbow()
   }
 }
 
-void propellerRainbow() 
-{
-  ledIndex++;
-  uint8_t N3  = int(NUM_LEDS/3);
-  uint8_t N6  = int(NUM_LEDS/6);  
-  uint8_t N12 = int(NUM_LEDS/12);  
-  for(uint8_t i = 0; i < N3; i++ ) {
-    uint8_t j0 = (ledIndex + i + NUM_LEDS - N12) % NUM_LEDS;
-    uint8_t j1 = (j0+N3) % NUM_LEDS;
-    uint8_t j2 = (j1+N3) % NUM_LEDS;    
-    leds[j0] = CHSV(0, 255, brightness);
-    leds[j1] = CHSV(80, 255, brightness);
-    leds[j2] = CHSV(160, 255, brightness);    
-  }
-}
-
 void risingRainbow()
 {
   for (uint8_t i = 0; i < NUM_LEDS; i++)
@@ -879,28 +867,6 @@ void candyCane() {
   for (uint8_t i = 0; i < NUM_LEDS; i++)
   {
     leds[i] = ColorFromPalette(RedWhite_p, zCoords[i] - beat8(speed));
-  }
-}
-
-void candyCane2() 
-{
-  ledIndex++;
-  uint8_t N3  = int(NUM_LEDS/3);
-  uint8_t N6  = int(NUM_LEDS/6);  
-  uint8_t N12 = int(NUM_LEDS/12);  
-  for(uint8_t i = 0; i < N6; i++ ) {
-    uint8_t j0 = (ledIndex + i + NUM_LEDS - N12) % NUM_LEDS;
-    uint8_t j1 = (j0+N6) % NUM_LEDS;
-    uint8_t j2 = (j1+N6) % NUM_LEDS;
-    uint8_t j3 = (j2+N6) % NUM_LEDS;
-    uint8_t j4 = (j3+N6) % NUM_LEDS;
-    uint8_t j5 = (j4+N6) % NUM_LEDS;
-    leds[j0] = CRGB(255, 255, 255).nscale8_video(brightness*.75);
-    leds[j1] = CRGB(255, 0, 0).nscale8_video(brightness);
-    leds[j2] = CRGB(255, 255, 255).nscale8_video(brightness*.75);
-    leds[j3] = CRGB(255, 0, 0).nscale8_video(brightness);
-    leds[j4] = CRGB(255, 255, 255).nscale8_video(brightness*.75);
-    leds[j5] = CRGB(255, 0, 0).nscale8_video(brightness);
   }
 }
 

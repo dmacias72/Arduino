@@ -388,3 +388,28 @@ void oceanTwinkles()
   twinkleFoxPalette = OceanColors_p;
   drawTwinkles();
 }
+
+void cosmicTwinkles()
+{
+  twinkleFoxPalette = bhw2_38_gp;
+  drawTwinkles();
+}
+
+void cosmic2Twinkles()
+{
+  twinkleFoxPalette = bhw3_20_gp;
+  drawTwinkles();
+}
+
+void purpleredTwinkles()
+{
+  twinkleFoxPalette = bhw1_purplered_gp;
+  drawTwinkles();
+}
+
+void watermelonTwinkles()
+{
+  twinkleFoxPalette = bhw2_08_gp;
+  drawTwinkles();
+}
+
