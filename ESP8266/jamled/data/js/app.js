@@ -57,9 +57,7 @@ $(document).ready(function() {
     .fail(function(errorThrown) {
       console.log("error: " + errorThrown);
     });
-
 });
-
 
 function addNumberField(field) {
   var template = $("#numberTemplate").clone();
@@ -154,36 +152,15 @@ function addSelectField(field) {
   label.attr("for", id);
   label.text(field.label);
 
-  var select = template.find('.form-control');
-  select.attr('id', id);
+  var select = template.find(".form-control");
+  select.attr("id", id);
 
-  var idDropdown = 'dropdown-menu-' + field.name;
-
-  var dropdown = template.find('.dropdown-menu');
-  dropdown.attr('id', idDropdown);
-  var list = $('<li></li>');
-  var link = $('<a href="#" class="small" tabIndex="-1"><input type="checkbox"/> Select All</a>');
-
-  var idDropdownToggle = 'dropdown-toggle-' + field.name;
-  template.attr('id', idDropdownToggle);
-  list.append(link);
-  dropdown.append(list);
-
-  var Length = field.options.length;
-  for (var i = 0; i < Length; i++) {
+  for (var i = 0; i < field.options.length; i++) {
     var optionText = field.options[i];
-    var option = $('<option></option>');
+    var option = $("<option></option>");
     option.text(optionText);
-    option.attr('value', i);
+    option.attr("value", i);
     select.append(option);
-
-    list = $('<li></li>');
-    link = $('<a href="#" class="small" tabIndex="-1"></a>');
-    link.addClass('dropdown-select-' + field.name);
-    link.append('<input type="checkbox"/> ' + optionText);
-    link.attr('data-value', i);
-    list.append(link);
-    dropdown.append(list);
   }
 
   select.val(field.value);
@@ -217,35 +194,6 @@ function addSelectField(field) {
   });
 
   $("#form").append(template);
-
-  var options = [];
-
-  $('#' + idDropdown + ' a').on('click', function(event) {
-    var $target = $(event.currentTarget),
-      val = $target.attr('data-value'),
-      $inp = $target.find('input'),
-      idx;
-
-    if ((idx = options.indexOf(val)) > -1 ) {
-      options.splice( idx, 1 );
-      setTimeout(function() {$inp.prop( 'checked', false)}, 0);
-    } else {
-      options.push( val );
-      setTimeout(function() {$inp.prop( 'checked', true)}, 0);
-    }
-
-    $(event.target).blur();
-
-    console.log(options);
-    return false;
-  });
-
-  $('#' + idDropdownToggle).on('click', function(event) {
-    var checkedStatus = $(this)[0].checked;
-    $('#' +  idDropdown).find("input[type='checkbox']").each(function() {
-      $(this).prop('checked', checkedStatus);
-    });
-  });
 }
 
 function addColorFieldPicker(field) {
