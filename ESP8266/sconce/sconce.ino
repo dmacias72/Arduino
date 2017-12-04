@@ -39,8 +39,6 @@ extern "C" {
 
 #define HOSTNAME "Sconce-" ///< Hostname. The setup function adds the Chip ID at the end.
 
-#include "elapsedMillis.h"
-
 // Wi-Fi network to connect to (if not in AP mode)
 const char* ssid = "";
 const char* password = "";
