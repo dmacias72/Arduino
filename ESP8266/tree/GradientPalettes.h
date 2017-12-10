@@ -465,6 +465,93 @@ DEFINE_GRADIENT_PALETTE( Blue_Cyan_Yellow_gp ) {
   191,  42,255, 45,
   255, 255,255,  0};
 
+// Gradient palette "bhw1_purplered_gp", originally from
+// http://soliton.vm.bytemark.co.uk/pub/cpt-city/bhw/bhw1/tn/bhw1_purplered.png.index.html
+// converted for FastLED with gammas (2.6, 2.2, 2.5)
+// Size: 8 bytes of program space.
+
+DEFINE_GRADIENT_PALETTE( bhw1_purplered_gp ) {
+    0, 255,  0,  0,
+  255, 107,  1,205};
+
+
+// Gradient palette "bhw2_38_gp", originally from
+// http://soliton.vm.bytemark.co.uk/pub/cpt-city/bhw/bhw2/tn/bhw2_38.png.index.html
+// converted for FastLED with gammas (2.6, 2.2, 2.5)
+// Size: 32 bytes of program space.
+
+DEFINE_GRADIENT_PALETTE( bhw2_38_gp ) {
+    0, 104,205,212,
+   28,  32,184,203,
+   61,  39, 39,168,
+   96,  46,  1,144,
+  130,   8,  1, 22,
+  163,  17,  3, 28,
+  196,  24,  4, 31,
+  255, 213,  9, 89};
+
+// Gradient palette "bhw2_39_gp", originally from
+// http://soliton.vm.bytemark.co.uk/pub/cpt-city/bhw/bhw2/tn/bhw2_39.png.index.html
+// converted for FastLED with gammas (2.6, 2.2, 2.5)
+// Size: 28 bytes of program space.
+
+DEFINE_GRADIENT_PALETTE( bhw2_39_gp ) {
+    0,   2,184,188,
+   33,  56, 27,162,
+   66,  56, 27,162,
+  122, 255,255, 45,
+  150, 227, 65,  6,
+  201,  67, 13, 27,
+  255,  16,  1, 53};
+
+// Gradient palette "bhw2_57_gp", originally from
+// http://soliton.vm.bytemark.co.uk/pub/cpt-city/bhw/bhw2/tn/bhw2_57.png.index.html
+// converted for FastLED with gammas (2.6, 2.2, 2.5)
+// Size: 28 bytes of program space.
+
+DEFINE_GRADIENT_PALETTE( bhw2_57_gp ) {
+    0,   0,  0,  0,
+   43,  14,  2,  5,
+   81,  40,  1,  7,
+  130, 182,  1,  1,
+  173,  40,  1,  7,
+  214,  14,  2,  5,
+  255,   0,  0,  0};
+
+// Gradient palette "bhw3_20_gp", originally from
+// http://soliton.vm.bytemark.co.uk/pub/cpt-city/bhw/bhw3/tn/bhw3_20.png.index.html
+// converted for FastLED with gammas (2.6, 2.2, 2.5)
+// Size: 40 bytes of program space.
+
+DEFINE_GRADIENT_PALETTE( bhw3_20_gp ) {
+    0, 120, 23, 21,
+   25,  26,  2, 11,
+   68,  53,  9,203,
+   94, 153, 34,207,
+  119, 130, 13, 22,
+  132, 206, 63, 36,
+  168,  33,  3, 26,
+  196, 242, 77,164,
+  219, 112, 16, 50,
+  255, 208,161,250};
+
+// Gradient palette "bhw2_08_gp", originally from
+// http://soliton.vm.bytemark.co.uk/pub/cpt-city/bhw/bhw2/tn/bhw2_08.png.index.html
+// converted for FastLED with gammas (2.6, 2.2, 2.5)
+// Size: 44 bytes of program space.
+
+DEFINE_GRADIENT_PALETTE( bhw2_08_gp ) {
+    0,   0, 12,  0,
+   33,  10,136, 11,
+   50,  60,146, 25,
+   51, 171,154, 46,
+   61, 171,154, 46,
+   68, 255,255,255,
+   69, 247, 96,127,
+   73, 239, 16, 48,
+  162, 224, 52, 83,
+  247, 210,111,130,
+  255, 210,111,130};
 
 // Single array of defined cpt-city color palettes.
 // This will let us programmatically choose one based on
@@ -477,6 +564,12 @@ DEFINE_GRADIENT_PALETTE( Blue_Cyan_Yellow_gp ) {
 // This list of color palettes acts as a "playlist"; you can
 // add or delete, or re-arrange as you wish.
 const TProgmemRGBGradientPalettePtr gGradientPalettes[] = {
+  bhw1_purplered_gp,
+  bhw2_08_gp,
+  bhw2_38_gp,
+  bhw2_39_gp,
+  bhw2_57_gp,
+  bhw3_20_gp,
   Sunset_Real_gp,
   es_rivendell_15_gp,
   es_ocean_breeze_036_gp,
