@@ -128,6 +128,8 @@ typedef PatternAndName PatternAndNameList[];
 #include "TwinkleFOX.h"
 #include "Noise.h"
 #include "Meteors.h"
+#include "Lightning2014.h"
+#include "BouncingBalls2014.h"
 
 // List of patterns to cycle through.  Each is defined as a separate function below.
 
@@ -186,6 +188,10 @@ PatternAndNameList patterns = {
   { fireTwinkles,           "Fire Twinkles" },
   { cloud2Twinkles,         "Cloud 2 Twinkles" },
   { oceanTwinkles,          "Ocean Twinkles" },
+  { cosmicTwinkles,         "Cosmic Twinkles" },
+  { cosmic2Twinkles,        "Cosmic 2 Twinkles" },
+  { purpleredTwinkles,      "Purple Red Twinkles" },
+  { watermelonTwinkles,     "Watermelon Twinkles" },
 
   { candyCane,              "Candy Cane" },
 
@@ -201,6 +207,8 @@ PatternAndNameList patterns = {
   { oceanNoise, "Ocean Noise" },
   { blackAndWhiteNoise, "Black & White Noise" },
   { blackAndBlueNoise, "Black & Blue Noise" },
+  { cosmicNoise, "Cosmic Noise" },
+  { watermelonNoise, "Watermelon Noise" },
 
   { rainbow,                "Rainbow" },
   { rainbowWithGlitter,     "Rainbow With Glitter" },
@@ -208,7 +216,9 @@ PatternAndNameList patterns = {
   { confetti,               "Confetti" },
   { sinelon,                "Sinelon" },
   { bpm,                    "Beat" },
+  { bouncingballs,          "Bouncing Balls 2014" },
   { juggle,                 "Juggle" },
+  { lightning,              "Lightning 2014" },
   { fire,                   "Fire" },
   { water,                  "Water" },
 
@@ -906,6 +916,11 @@ void bpm()
   }
 }
 
+void bouncingballs()
+{
+  bouncingBalls2014();
+}
+
 void juggle()
 {
   static uint8_t    numdots =   4; // Number of dots in use.
@@ -938,6 +953,11 @@ void juggle()
     leds[beatsin16(basebeat + i + numdots, 0, NUM_LEDS)] += CHSV(gHue + curhue, thissat, thisbright);
     curhue += hueinc;
   }
+}
+
+void lightning()
+{
+  lightning2014();
 }
 
 void fire()
